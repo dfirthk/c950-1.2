@@ -17,7 +17,7 @@ def readData(filename, startRow, endRow, startCol, endCol):
         return dataList
 
 #Running readData on the Distances.csv and Packages.csv files to pull the needed data from the files and append it to their own lists
-distanceList = readData("./csvs/Distances.csv", 8, 35, 2, 30)
+distanceList = readData("./csvs/Distances.csv", 5, 32, 2, 29)
 packageList = readData("./csvs/Packages.csv", 8, 48, 0, 8)
 addressList = readData("./csvs/Distances.csv", 5, 32, 0, 1)
 
@@ -54,6 +54,3 @@ def convertToFloat(distanceList):
 #print(distanceList)
 #print(packageList)
 #print(addressList)
-
-for row in distanceList:
-    print(row)

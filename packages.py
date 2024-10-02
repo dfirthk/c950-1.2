@@ -1,4 +1,5 @@
 import datetime
+from datetime import timedelta
 
 from csvReader import packageList
 from hashTable import HashTable
@@ -15,18 +16,21 @@ class Package:
         self.weight = weight
         self.notes = notes
         self.status = status
-        self.departTime = departTime
-        self.delTime = delTime
-
+        self.departTime = departTime if departTime is not None \
+            else datetime.timedelta()
+        self.delTime = delTime if delTime is not None \
+            else datetime.timedelta()
     #def __repr__(self):
         #return (f"{self.address}, {self.city}, {self.state}, {self.zip}, {self.deadline}, {self.weight}, {self.notes}, {self.status}, {self.departTime}, {self.delTime}")
 
     def __str__(self):
-        return f"ID: {self.id}, {self.address}, {self.city}, {self.state}, {self.zip}, Deadline: {self.deadline}, {self.weight}, {self.notes}, {self.status}, Departure Time: {self.departTime}, Delivery Time: {self.delTime}"
+        return f" {self.id} || {self.address} || {self.city} || {self.state} || {self.zip} || Deadline: {self.deadline} || {self.weight} ||  {self.notes} || {self.status} || Departure Time: {self.departTime} || Delivery Time: {self.delTime}"
+    def packageStatus(self, currentTime):
+        return f" {self.id} || , {self.address} || , {self.city} || , {self.state} || , {self.zip} || , Deadline: {self.deadline} ||, {self.weight} ||, {self.notes} ||, {self.status} || , Departure Time: {self.departTime} || , Delivery Time: {currentTime}"
 
     #Function updating package status based on the time, as special notes change package instructions during the day
     def updatePackage(self, currentTime):
-        if self.delTime is None:
+        if self.delTime == None:
             self.status = "At the Hub"
         elif currentTime < self.departTime:
             self.status = "At the Hub"
@@ -61,5 +65,3 @@ def insertPackages(packageHash):
 
 #Linking the packageHash list to the HashTable and inserting the data from the list to the HashTable
 packageHash = HashTable()
-insertPackages(packageHash)
-print(packageHash.search(26))

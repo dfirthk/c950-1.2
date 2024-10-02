@@ -62,8 +62,3 @@ def deliverPackages(truck):
             truck.currentTime += datetime.timedelta(hours=nextAddress/truck.speed)
             nextPackage.delTime = truck.currentTime
             nextPackage.departureTime = truck.departTime
-
-deliverPackages(truck1)
-deliverPackages(truck2)
-
-print("The total miles the truck traveled is: ", truck2.miles)
