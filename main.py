@@ -2,20 +2,21 @@
 #Student ID: 001488123
 #Class: C950 - Data Structures and Algorithms II
 
-import datetime
-from asyncio import start_unix_server
-from datetime import datetime, timedelta
 
-from csvReader import addressList, distanceList, packageList
+from datetime import datetime, timedelta
 from packages import packageHash, insertPackages, Package
 from trucks import truck1, truck2, truck3, deliverPackages
 
 #Delivering packages on Truck 1
 deliverPackages(truck1)
+
 #Delivering packages on Truck 3
 deliverPackages(truck3)
+
 #Finding the earliest one of the trucks return to the warehouse
-#as only 2 trucks can be gone at the same time.
+#as only 2 trucks can be gone at the same time. Changing the value of
+#package 9 inversely, and outside the object, so when we look the package up
+#it's not actually updating the object permanently
 truck2.departTime = min(truck2.departTime, truck3.departTime)
 packageHash.search(9).address = "410 S State St"
 packageHash.search(9).zip = "84111"

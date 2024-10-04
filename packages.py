@@ -22,6 +22,7 @@ class Package:
     #def __repr__(self):
         #return (f"{self.address}, {self.city}, {self.state}, {self.zip}, {self.deadline}, {self.weight}, {self.notes}, {self.status}, {self.departTime}, {self.delTime}")
 
+    #Formatted return string of the object.
     def __str__(self):
         return f" {self.id} || {self.address} || {self.city} || {self.state} || {self.zip} || Deadline: {self.deadline} || {self.weight} ||  {self.notes} || {self.status} || Departure Time: {self.departTime} || Delivery Time: {self.delTime} || Truck Number: {self.truck}"
 
