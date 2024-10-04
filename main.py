@@ -17,6 +17,8 @@ deliverPackages(truck3)
 #Finding the earliest one of the trucks return to the warehouse
 #as only 2 trucks can be gone at the same time.
 truck2.departTime = min(truck2.departTime, truck3.departTime)
+packageHash.search(9).address = "410 S State St"
+packageHash.search(9).zip = "84111"
 deliverPackages(truck2)
 
 #Function to get user's input for the package ID they want to search for
@@ -47,9 +49,9 @@ def statusColor(status):
 def option2(packageID, updatedTime):
     for packageID in packageID:
         packageSearch = packageHash.search(packageID)
-        packageSearch.updatePackage(updatedTime)
         print(f"{header}")
-        print(statusColor(packageSearch.status) + str(packageSearch) + "\033[0m")
+        status, printstr = packageSearch.packageStatus(updatedTime)
+        print(statusColor(status) + printstr + "\033[0m")
     print("\n\n")
 
 #Function for Option 3: Getting the package status based on the user's time input
@@ -59,14 +61,14 @@ def option3(updatedTime):
     for bucket in packageHash.table:
         for key, _ in bucket:
             packageSearch = packageHash.search(key)
-            packageSearch.updatePackage(updatedTime)
-            print(statusColor(packageSearch.status) + str(packageSearch) + "\033[0m")
+            status,printstr = packageSearch.packageStatus(updatedTime)
+            print(statusColor(status) + printstr + "\033[0m")
     print("\n\n")
 
 #Creating header for the UI
 header = (
         "ID   ||    ADDRESS      ||   CITY   ||  STATE  ||  ZIPCODE  || "
-        "DEADLINE || WEIGHT (KILO) || SPECIAL NOTES || PACKAGE STATUS || DEPARTURE TIME || DELIVERY TIME")
+        "DEADLINE || WEIGHT (KILO) || SPECIAL NOTES || PACKAGE STATUS || DEPARTURE TIME || DELIVERY TIME || TRUCK NUMBER: ")
 
 #User Interface
 print("\n\nWELCOME TO WESTERN GOVERNORS UNIVERSITY PARCEL SERVICE")

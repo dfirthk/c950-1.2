@@ -5,16 +5,17 @@ from packages import packageHash, insertPackages, Package
 
 # Truck Class with it's associated functions
 class Trucks:
-    def __init__(self, speed, miles, currentLocation, departTime, packageIds):
+    def __init__(self, speed, miles, currentLocation, departTime, packageIds, truckNumber = None):
         self.speed = speed
         self.miles = miles
         self.currentLocation = currentLocation
         self.departTime = departTime
         self.currentTime = departTime
         self.packageIds = packageIds
+        self.truckNumber = truckNumber
 
     def __str__(self):
-        return f"{self.speed}, {self.miles}, {self.currentLocation}, {self.currentTime}, {self.departTime}, {self.packageIds}"
+        return f"{self.speed}, {self.miles}, {self.currentLocation}, {self.currentTime}, {self.departTime}, {self.packageIds}, {self.truckNumber}"
 
 def minDistance(address):
     for row in addressList:
@@ -30,9 +31,9 @@ def distanceBetween(address1, address2):
 
 insertPackages(packageHash)
 
-truck1 = Trucks(18, 0.0, "4001 South 700 East", datetime.timedelta(hours=8), [1, 13, 14, 15, 16, 19, 20, 27, 29, 30, 31, 34, 37, 40])
-truck2 = Trucks(18, 0.0, "4001 South 700 East", datetime.timedelta(hours=11), [2, 3, 4, 5, 9, 18, 26, 28, 32, 35, 36, 38])
-truck3 = Trucks(18, 0.0, "4001 South 700 East", datetime.timedelta(hours=12), [6,7,8,10,11,12,17,21,22,23,24,25,33,39])
+truck1 = Trucks(18, 0.0, "4001 South 700 East", datetime.timedelta(hours=8), [1, 13, 14, 15, 16, 19, 20, 27, 29, 30, 31, 34, 37, 40], 1)
+truck2 = Trucks(18, 0.0, "4001 South 700 East", datetime.timedelta(hours=11), [2, 3, 4, 5, 9, 18, 26, 28, 32, 35, 36, 38], 2)
+truck3 = Trucks(18, 0.0, "4001 South 700 East", datetime.timedelta(hours=12), [6,7,8,10,11,12,17,21,22,23,24,25,33,39], 3)
 
 
 def deliverPackages(truck):
@@ -61,4 +62,5 @@ def deliverPackages(truck):
             truck.currentLocation = nextPackage.address
             truck.currentTime += datetime.timedelta(hours=nextAddress/truck.speed)
             nextPackage.delTime = truck.currentTime
-            nextPackage.departureTime = truck.departTime
+            nextPackage.departTime = truck.departTime
+            nextPackage.truck = truck.truckNumber
